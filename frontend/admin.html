@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <h1>Admin Dashboard</h1>
+  <button onclick="logout()">Logout</button>
+
+  <div class="card">
+    <h2>Add Parking Slot</h2>
+    <input id="slotNumber" placeholder="Slot Number (ex: C10)" />
+    <select id="vehicleType">
+      <option value="">Select Vehicle Type</option>
+      <option value="car">Car</option>
+      <option value="bike">Bike</option>
+    </select>
+    <button onclick="addSlot()">Add Slot</button>
+    <p id="adminMsg"></p>
+  </div>
+
+  <div class="card">
+    <h2>Reset Slot</h2>
+    <input id="resetSlotId" placeholder="Slot ID" />
+    <button onclick="resetSlot()">Reset Slot</button>
+  </div>
+
+  <div class="card">
+  <h2>All Parking Slots</h2>
+  <button onclick="loadAllSlots()">Refresh Slots</button>
+  <ul id="allSlots"></ul>
+</div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

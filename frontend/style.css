@@ -1,0 +1,952 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  min-height: 100vh;
+  color: #333;
+}
+
+/* NAVBAR */
+nav {
+  background: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav h1 {
+  margin: 0;
+  color: #5a67d8;
+}
+
+nav span {
+  font-size: 14px;
+}
+
+/* MAIN */
+main {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.card h2 {
+  margin-top: 0;
+  color: #4c51bf;
+}
+
+/* INPUTS */
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* BUTTONS */
+button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #edf2f7;
+  margin: 5px 3px;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+.primary {
+  background: #5a67d8;
+  color: white;
+  width: 100%;
+  font-weight: bold;
+}
+
+/* FILTERS */
+.filters {
+  margin-bottom: 15px;
+}
+
+/* SLOT GRID */
+.slot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 15px;
+}
+
+/* SLOT CARD */
+.slot {
+  background: #f7fafc;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  border-left: 5px solid #5a67d8;
+}
+
+.slot.car {
+  border-color: #48bb78;
+}
+
+.slot.bike {
+  border-color: #ed8936;
+}
+
+.slot h3 {
+  margin: 5px 0;
+}
+
+.slot button {
+  background: #5a67d8;
+  color: white;
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* ADMIN PANEL + SELECT FIX */
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* ADMIN MESSAGE */
+#adminMsg {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #4c51bf;
+}
+
+/* BOOKINGS LIST */
+#myBookings li {
+  background: #edf2f7;
+  margin: 6px 0;
+  padding: 8px;
+  border-radius: 6px;
+}
+/* Layout */
+body {
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 10px;
+  margin: 20px auto;
+  max-width: 800px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* Buttons */
+button {
+  background: #5b6ee1;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 6px 4px;
+}
+
+button:hover {
+  background: #4c5fd7;
+}
+
+/* Lists */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: #f1f5f9;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 6px 0;
+}
+/* =========================
+   IMPROVED DARK MODE UI
+========================= */
+
+body.dark {
+  background: radial-gradient(circle at top, #1b1b2f, #0f0f1a);
+  color: #eaeaf0;
+}
+
+/* Main cards */
+body.dark .card {
+  background: rgba(30, 30, 50, 0.75);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Slot card */
+body.dark .slot {
+  background: linear-gradient(135deg, #24243e, #302b63);
+  color: #ffffff;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* Slot hover */
+body.dark .slot:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+}
+
+/* Slot number */
+/* =========================
+   GLOBAL ANIMATIONS (ALL MODES)
+========================= */
+
+/* Slot entry animation */
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Slot hover animation */
+.slot {
+  animation: fadeSlide 0.45s ease forwards;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.slot:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.18);
+}
+
+/* Button micro-interaction */
+button {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+/* Vehicle type badge */
+body.dark .slot::after {
+  content: attr(data-type);
+  display: inline-block;
+  margin-left: 10px;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.15);
+  color: #e0e0ff;
+}
+
+/* Book button */
+body.dark .slot button {
+  margin-top: 12px;
+  width: 100%;
+  background: linear-gradient(135deg, #7f7cff, #5a5cff);
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+body.dark .slot button:hover {
+  filter: brightness(1.15);
+  transform: translateY(-2px);
+}
+
+/* Filter buttons */
+body.dark button {
+  background: linear-gradient(135deg, #6a67ff, #8f8cff);
+  color: white;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  min-height: 100vh;
+  color: #333;
+}
+
+/* NAVBAR */
+nav {
+  background: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav h1 {
+  margin: 0;
+  color: #5a67d8;
+}
+
+nav span {
+  font-size: 14px;
+}
+
+/* MAIN */
+main {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.card h2 {
+  margin-top: 0;
+  color: #4c51bf;
+}
+
+/* INPUTS */
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* BUTTONS */
+button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #edf2f7;
+  margin: 5px 3px;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+.primary {
+  background: #5a67d8;
+  color: white;
+  width: 100%;
+  font-weight: bold;
+}
+
+/* FILTERS */
+.filters {
+  margin-bottom: 15px;
+}
+
+/* SLOT GRID */
+.slot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 15px;
+}
+
+/* SLOT CARD */
+.slot {
+  background: #f7fafc;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  border-left: 5px solid #5a67d8;
+}
+
+.slot.car {
+  border-color: #48bb78;
+}
+
+.slot.bike {
+  border-color: #ed8936;
+}
+
+.slot h3 {
+  margin: 5px 0;
+}
+
+.slot button {
+  background: #5a67d8;
+  color: white;
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* ADMIN PANEL + SELECT FIX */
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* ADMIN MESSAGE */
+#adminMsg {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #4c51bf;
+}
+
+/* BOOKINGS LIST */
+#myBookings li {
+  background: #edf2f7;
+  margin: 6px 0;
+  padding: 8px;
+  border-radius: 6px;
+}
+/* Layout */
+body {
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 10px;
+  margin: 20px auto;
+  max-width: 800px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* Buttons */
+button {
+  background: #5b6ee1;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 6px 4px;
+}
+
+button:hover {
+  background: #4c5fd7;
+}
+
+/* Lists */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: #f1f5f9;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 6px 0;
+}
+/* =========================
+   IMPROVED DARK MODE UI
+========================= */
+
+body.dark {
+  background: radial-gradient(circle at top, #1b1b2f, #0f0f1a);
+  color: #eaeaf0;
+}
+
+/* Main cards */
+body.dark .card {
+  background: rgba(30, 30, 50, 0.75);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Slot card */
+body.dark .slot {
+  background: linear-gradient(135deg, #24243e, #302b63);
+  color: #ffffff;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  animation: fadeSlide 0.4s ease;
+}
+
+/* Slot hover */
+body.dark .slot:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+}
+
+/* Slot number */
+body.dark .slot strong {
+  font-size: 18px;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+/* Vehicle type badge */
+body.dark .slot::after {
+  content: attr(data-type);
+  display: inline-block;
+  margin-left: 10px;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.15);
+  color: #e0e0ff;
+}
+
+/* Book button */
+body.dark .slot button {
+  margin-top: 12px;
+  width: 100%;
+  background: linear-gradient(135deg, #7f7cff, #5a5cff);
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+body.dark .slot button:hover {
+  filter: brightness(1.15);
+  transform: translateY(-2px);
+}
+
+/* Filter buttons */
+body.dark button {
+  background: linear-gradient(135deg, #6a67ff, #8f8cff);
+  color: rgb(0, 0, 0);
+}
+
+/* FIX: My Bookings text visibility in dark mode */
+body.dark #myBookings li {
+  color: #000000;
+  font-weight: 500;
+}
+
+/* Make slot text visible too */
+body.dark .slot {
+  color: #ffffff;
+}
+
+body.dark .slot strong {
+  color: #ffffff;
+}
+
+/* Cancel button styling (same as Book) */
+#myBookings .slot button {
+  background: linear-gradient(135deg, #ff6b6b, #ff4d4d);
+}
+
+#myBookings .slot button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+/* =========================
+   SLOT COLOR DIFFERENCE
+   (Available Slots + My Bookings)
+========================= */
+
+/* CAR SLOT – GREEN */
+.slot.car {
+  border-left: 5px solid #22c55e;
+}
+
+body.dark .slot.car {
+  border-left: 5px solid #22c55e;
+  box-shadow: 0 0 18px rgba(34, 197, 94, 0.35);
+}
+
+/* BIKE SLOT – RED / ORANGE */
+.slot.bike {
+  border-left: 5px solid #ef4444;
+}
+
+body.dark .slot.bike {
+  border-left: 5px solid #ef4444;
+  box-shadow: 0 0 18px rgba(239, 68, 68, 0.35);
+}
+
+/* Vehicle type badge color */
+.slot.car::after {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+}
+
+.slot.bike::after {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+/* =========================
+   AVAILABLE SLOTS – PREMIUM LOOK
+========================= */
+
+/* Base slot card */
+.slot {
+  position: relative;
+  padding: 22px 18px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #2a2a45, #1e1e35);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.45);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+/* Slot hover animation */
+.slot:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 22px 50px rgba(0,0,0,0.7);
+}
+
+/* Slot title (B1, C1, etc) */
+.slot strong {
+  font-size: 22px;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+/* =========================
+   CAR SLOT (GREEN)
+========================= */
+.slot.car {
+  border-left: 6px solid #22c55e;
+}
+
+.slot.car::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(34,197,94,0.25), transparent);
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.slot.car:hover {
+  box-shadow: 0 0 35px rgba(34,197,94,0.55);
+}
+
+/* =========================
+   BIKE SLOT (RED)
+========================= */
+.slot.bike {
+  border-left: 6px solid #ef4444;
+}
+
+.slot.bike::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(239,68,68,0.25), transparent);
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.slot.bike:hover {
+  box-shadow: 0 0 35px rgba(239,68,68,0.55);
+}
+
+/* =========================
+   BOOK BUTTON (AVAILABLE SLOTS)
+========================= */
+.slot button {
+  margin-top: 14px;
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #7f7cff, #5a5cff);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.slot button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(120,120,255,0.6);
+}
+
+/* =========================
+   VEHICLE TYPE BADGE
+========================= */
+.slot::after {
+  content: attr(data-type);
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 12px;
+  font-size: 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* =========================
+   DARK MODE – AVAILABLE SLOT COLORS FIX
+========================= */
+
+/* CAR SLOT – GREEN */
+body.dark .slot.car {
+  border-left: 4px solid #22c55e;
+  box-shadow: 0 0 18px rgba(34, 197, 94, 0.45);
+}
+
+body.dark .slot.car strong {
+  color: #bbf7d0;
+}
+
+/* BIKE SLOT – RED */
+body.dark .slot.bike {
+  border-left: 4px solid #ef4444;
+  box-shadow: 0 0 18px rgba(239, 68, 68, 0.45);
+}
+
+body.dark .slot.bike strong {
+  color: #fecaca;
+}
+
+
+/* ================================
+   Available Slots – NO GLOW
+================================ */
+
+body.dark .available-slots .slot {
+  box-shadow: none !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+body.dark .available-slots .slot:hover {
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Color indicator only (NO glow) */
+body.dark .available-slots .slot.car {
+  border-left: 4px solid #22c55e; /* green */
+}
+
+body.dark .available-slots .slot.bike {
+  border-left: 4px solid #ef4444; /* red */
+}
+
+/* =====================================
+   LIGHT MODE – AVAILABLE SLOTS
+===================================== */
+
+.available-slots {
+  background: linear-gradient(135deg, #f8fafc, #eef2ff);
+}
+
+.available-slots .slot {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 14px;
+  border-left: 6px solid transparent;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.available-slots .slot:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+}
+
+/* Car = Green */
+.available-slots .slot.car {
+  border-left-color: #22c55e;
+}
+
+/* Bike = Red */
+.available-slots .slot.bike {
+  border-left-color: #ef4444;
+}
+
+.available-slots .slot strong {
+  font-size: 18px;
+  color: #1f2937;
+}
+
+.available-slots .slot button {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: 600;
+}
+
+.available-slots .slot button:hover {
+  filter: brightness(1.1);
+}
+
+/* =====================================
+   LIGHT MODE – MY BOOKINGS
+===================================== */
+
+.my-bookings {
+  background: linear-gradient(135deg, #ffffff, #f1f5f9);
+}
+
+.my-bookings .slot {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.1);
+}
+
+/* Bike booking */
+.my-bookings .slot.bike {
+  border-left: 6px solid #ef4444;
+}
+
+/* Car booking */
+.my-bookings .slot.car {
+  border-left: 6px solid #22c55e;
+}
+
+.my-bookings .slot button {
+  background: #ff5f5f;
+  color: white;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.my-bookings .slot button:hover {
+  background: #e64848;
+}
+
+/* ==============================
+   LIGHT MODE – AVAILABLE SLOTS
+   (STRICTLY NOT DARK MODE)
+============================== */
+
+body:not(.dark) .available-slots .slot {
+  background: linear-gradient(135deg, #ffffff, #f6f7ff);
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+  border-left: 6px solid transparent;
+}
+
+/* CAR SLOT – LIGHT MODE */
+body:not(.dark) .available-slots .slot.car {
+  border-left-color: #22c55e;
+  background: linear-gradient(135deg, #ecfdf5, #ffffff);
+}
+
+/* BIKE SLOT – LIGHT MODE */
+body:not(.dark) .available-slots .slot.bike {
+  border-left-color: #ef4444;
+  background: linear-gradient(135deg, #fff1f2, #ffffff);
+}
+
+/* TEXT */
+body:not(.dark) .available-slots .slot strong {
+  color: #1f2937;
+}
+
+/* BADGE */
+body:not(.dark) .available-slots .slot .badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+body:not(.dark) .available-slots .slot.car .badge {
+  background: #dcfce7;
+  color: #166534;
+}
+
+body:not(.dark) .available-slots .slot.bike .badge {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* ==============================
+   LIGHT MODE – MY BOOKINGS
+============================== */
+
+body:not(.dark) .my-bookings .slot {
+  background: linear-gradient(135deg, #ffffff, #f6f7ff);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.14);
+  text-align: center;
+}
+
+/* BIKE BOOKING */
+body:not(.dark) .my-bookings .slot.bike {
+  border-top: 6px solid #ef4444;
+  background: linear-gradient(135deg, #fff1f2, #ffffff);
+}
+
+/* CAR BOOKING */
+body:not(.dark) .my-bookings .slot.car {
+  border-top: 6px solid #22c55e;
+  background: linear-gradient(135deg, #ecfdf5, #ffffff);
+}
+
+/* REMOVE the TOP (CSS-generated) vehicle label */
+.slot::after {
+  content: none !important;
+}
+

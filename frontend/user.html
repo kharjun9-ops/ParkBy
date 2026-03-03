@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <h1>User Dashboard</h1>
+  <button onclick="logout()">Logout</button>
+  <button onclick="toggleTheme()" id="themeBtn">🌙 Dark Mode</button>
+
+  <!-- AVAILABLE SLOTS -->
+  <div class="card available-slots">
+    <h2>Available Slots</h2>
+
+      <!-- vehicle number input -->
+    <input
+        type="text"
+        id="vehicleNumber"
+        placeholder="Enter Vehicle Number (ex: KA01AB1234)"
+        style="width:100%; padding:10px; margin-bottom:12px;"
+    />
+
+    <br /><br />
+    <button onclick="loadSlots()">All</button>
+    <button onclick="loadSlots('car')">Cars</button>
+    <button onclick="loadSlots('bike')">Bikes</button>
+    <div id="slots"></div>
+  </div>
+
+  <!-- MY BOOKINGS -->
+  <div class="card">
+    <h2>My Bookings</h2>
+    <button onclick="loadMyBookings()">Load My Bookings</button>
+    <div id="myBookings" class="slot-grid"></div>
+  </div>
+
+  <script src="user.js"></script>
+</body>
+</html>
