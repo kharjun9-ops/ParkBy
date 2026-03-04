@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "ParkBy - Smart Parking Management System",
   "scripts": {
-    "start": "cd backend && npm install && node server.js",
-    "install": "cd backend && npm install"
+    "start": "node backend/server.js",
+    "postinstall": "cd backend && npm install"
   },
   "engines": {
     "node": ">=18.0.0"
