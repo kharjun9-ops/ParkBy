@@ -20,7 +20,6 @@ function showToast(message, type = 'info') {
   
   container.appendChild(toast);
   
-  // Auto remove after 4 seconds
   setTimeout(() => {
     toast.classList.add('toast-out');
     setTimeout(() => toast.remove(), 300);
@@ -29,34 +28,42 @@ function showToast(message, type = 'info') {
 
 // Set loading state
 function setLoading(isLoading) {
-  const btn = document.getElementById('loginBtn');
+  const btn = document.getElementById('signupBtn');
   const btnText = document.getElementById('btnText');
   const btnSpinner = document.getElementById('btnSpinner');
   
   if (isLoading) {
     btn.disabled = true;
     btn.style.opacity = '0.7';
-    btnText.textContent = 'Signing in...';
+    btnText.textContent = 'Creating account...';
     btnSpinner.classList.remove('hidden');
   } else {
     btn.disabled = false;
     btn.style.opacity = '1';
-    btnText.textContent = 'Sign In';
+    btnText.textContent = 'Create Account';
     btnSpinner.classList.add('hidden');
   }
 }
 
-// Login function
-async function login(event) {
+// Signup function
+async function signup(event) {
   if (event) event.preventDefault();
   
+  const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
   const msg = document.getElementById("msg");
 
   // Validate inputs
-  if (!email || !password) {
+  if (!name || !email || !password || !confirmPassword) {
     showToast('Please fill in all fields', 'warning');
+    return;
+  }
+
+  // Name validation
+  if (name.length < 2) {
+    showToast('Name must be at least 2 characters', 'warning');
     return;
   }
 
@@ -67,21 +74,34 @@ async function login(event) {
     return;
   }
 
+  // Password validation
+  if (password.length < 6) {
+    showToast('Password must be at least 6 characters', 'warning');
+    return;
+  }
+
+  // Confirm password
+  if (password !== confirmPassword) {
+    showToast('Passwords do not match', 'warning');
+    document.getElementById("confirmPassword").focus();
+    return;
+  }
+
   setLoading(true);
   msg.innerHTML = '';
 
   try {
-    const res = await fetch(`${API}/api/login`, {
+    const res = await fetch(`${API}/api/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ name, email, password })
     });
 
     const data = await res.json();
 
-    if (!data.token) {
+    if (!res.ok) {
       setLoading(false);
-      showToast(data.message || 'Login failed. Please check your credentials.', 'error');
+      showToast(data.message || 'Registration failed', 'error');
       
       // Shake animation on error
       const card = document.querySelector('.login-card');
@@ -91,26 +111,23 @@ async function login(event) {
     }
 
     // Success!
-    showToast('Login successful! Redirecting...', 'success');
+    showToast('Account created successfully! Redirecting to login...', 'success');
+    
+    msg.innerHTML = `
+      <div class="message success" style="margin-top: 16px;">
+        ✅ Account created! Redirecting...
+      </div>
+    `;
 
-    // Save credentials
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("role", data.role);
-    localStorage.setItem("userEmail", email);
-
-    // Redirect with delay for UX
+    // Redirect to login after delay
     setTimeout(() => {
-      if (data.role === "admin") {
-        window.location.href = "admin.html";
-      } else {
-        window.location.href = "user.html";
-      }
-    }, 1000);
+      window.location.href = "login.html";
+    }, 2000);
 
   } catch (err) {
     setLoading(false);
     showToast('Cannot connect to server. Please try again later.', 'error');
-    console.error('Login error:', err);
+    console.error('Signup error:', err);
   }
 }
 
@@ -138,13 +155,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
   
-  // Focus on email input
-  document.getElementById('email').focus();
-});
-
-// Enter key support
-document.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') {
-    login(e);
-  }
+  // Focus on name input
+  document.getElementById('name').focus();
 });

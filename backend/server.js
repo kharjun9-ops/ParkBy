@@ -10,7 +10,12 @@ console.log("db.js file loaded");
 
 const app = express();
 
-app.use(cors());
+// CORS - Allow requests from anywhere (for GitHub Pages, etc.)
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 // TEST ROUTE
@@ -63,7 +68,7 @@ app.post("/api/signup", async (req, res) => {
   }
 });
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

@@ -1,40 +1,192 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>User Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ParkBy – User Dashboard</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%234f46e5'/%3E%3Cstop offset='100%25' stop-color='%237c3aed'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23g)' d='M32 2C18.7 2 8 12.7 8 26c0 17.4 22 34.8 23 35.6.6.4 1.3.4 2 0 1-.8 23-18.2 23-35.6C56 12.7 45.3 2 32 2z'/%3E%3Ccircle fill='white' cx='32' cy='26' r='14'/%3E%3Cpath fill='%234f46e5' d='M28 18h8c3.3 0 6 2.7 6 6s-2.7 6-6 6h-4v4h-4V18zm4 8h4c1.1 0 2-.9 2-2s-.9-2-2-2h-4v4z'/%3E%3C/svg%3E">
 </head>
 <body>
 
-  <h1>User Dashboard</h1>
-  <button onclick="logout()">Logout</button>
-  <button onclick="toggleTheme()" id="themeBtn">🌙 Dark Mode</button>
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
 
-  <!-- AVAILABLE SLOTS -->
-  <div class="card available-slots">
-    <h2>Available Slots</h2>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <div class="navbar-logo">
+        <svg viewBox="0 0 64 64" width="32" height="32">
+          <defs>
+            <linearGradient id="navLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="100%" stop-color="#e0e7ff"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#navLogoGrad)" d="M32 4C19.8 4 10 13.8 10 26c0 16 20 32 21.2 33.1.5.4 1.1.4 1.6 0C34 58 54 42 54 26 54 13.8 44.2 4 32 4z"/>
+          <path fill="#4f46e5" d="M26 16h10c4.4 0 8 3.6 8 8s-3.6 8-8 8h-6v6h-4V16zm4 12h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v8z"/>
+        </svg>
+      </div>
+      <span class="navbar-title">ParkBy</span>
+    </div>
+    <div class="navbar-actions">
+      <div class="navbar-user">
+        <div class="navbar-user-avatar">👤</div>
+        <span id="userEmail">User</span>
+      </div>
+      <button class="btn btn-icon btn-secondary" onclick="toggleTheme()" id="themeBtn" title="Toggle Theme">
+        🌙
+      </button>
+      <button class="btn btn-outline btn-sm" onclick="logout()">
+        🚪 Logout
+      </button>
+    </div>
+  </nav>
 
-      <!-- vehicle number input -->
-    <input
-        type="text"
-        id="vehicleNumber"
-        placeholder="Enter Vehicle Number (ex: KA01AB1234)"
-        style="width:100%; padding:10px; margin-bottom:12px;"
-    />
+  <!-- Main Content -->
+  <main class="main-container">
+    
+    <!-- Header -->
+    <div class="dashboard-header">
+      <h1 class="dashboard-title">👋 Welcome Back!</h1>
+      <p class="dashboard-subtitle">Find and book your perfect parking spot in seconds</p>
+    </div>
 
-    <br /><br />
-    <button onclick="loadSlots()">All</button>
-    <button onclick="loadSlots('car')">Cars</button>
-    <button onclick="loadSlots('bike')">Bikes</button>
-    <div id="slots"></div>
-  </div>
+    <!-- Stats Cards -->
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card">
+        <div class="stat-icon primary">🅿️</div>
+        <div class="stat-info">
+          <h3 id="totalSlots">-</h3>
+          <p>Total Slots</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon success">✅</div>
+        <div class="stat-info">
+          <h3 id="availableSlots">-</h3>
+          <p>Available</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon warning">🚗</div>
+        <div class="stat-info">
+          <h3 id="carSlots">-</h3>
+          <p>Car Slots</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon danger">🏍️</div>
+        <div class="stat-info">
+          <h3 id="bikeSlots">-</h3>
+          <p>Bike Slots</p>
+        </div>
+      </div>
+    </div>
 
-  <!-- MY BOOKINGS -->
-  <div class="card">
-    <h2>My Bookings</h2>
-    <button onclick="loadMyBookings()">Load My Bookings</button>
-    <div id="myBookings" class="slot-grid"></div>
-  </div>
+    <!-- Dashboard Grid -->
+    <div class="dashboard-grid">
+      
+      <!-- Available Slots Section -->
+      <div class="card dashboard-main">
+        <div class="card-header">
+          <div class="card-title">
+            <div class="card-title-icon">🅿️</div>
+            <span>Available Parking Slots</span>
+          </div>
+          <button class="btn btn-sm btn-secondary" onclick="loadSlots()">
+            🔄 Refresh
+          </button>
+        </div>
+
+        <!-- Vehicle Number Input -->
+        <div class="input-group mb-3">
+          <span class="input-icon">🚗</span>
+          <input 
+            type="text" 
+            id="vehicleNumber" 
+            placeholder="Enter Vehicle Number (e.g., KA01AB1234)"
+            autocomplete="off"
+          />
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+          <button class="filter-tab active" onclick="setFilter('all', this)" data-filter="all">
+            🅿️ All Slots
+          </button>
+          <button class="filter-tab" onclick="setFilter('car', this)" data-filter="car">
+            🚗 Cars Only
+          </button>
+          <button class="filter-tab" onclick="setFilter('bike', this)" data-filter="bike">
+            🏍️ Bikes Only
+          </button>
+        </div>
+
+        <!-- Slots Grid -->
+        <div id="slots" class="slot-grid">
+          <div class="spinner"></div>
+        </div>
+      </div>
+
+      <!-- My Bookings Section -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <div class="card-title-icon">📋</div>
+            <span>My Bookings</span>
+          </div>
+          <button class="btn btn-sm btn-secondary" onclick="loadMyBookings()">
+            🔄
+          </button>
+        </div>
+
+        <div id="myBookings">
+          <div class="spinner"></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Quick Tips Section -->
+  <section class="main-container" style="margin-top: 0;">
+    <div class="card">
+      <div class="card-title mb-2">
+        <div class="card-title-icon">💡</div>
+        <span>Quick Tips</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 16px;">
+        <div style="display: flex; align-items: start; gap: 12px;">
+          <span style="font-size: 24px;">1️⃣</span>
+          <div>
+            <strong>Enter Vehicle Number</strong>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Add your vehicle number before booking</p>
+          </div>
+        </div>
+        <div style="display: flex; align-items: start; gap: 12px;">
+          <span style="font-size: 24px;">2️⃣</span>
+          <div>
+            <strong>Choose Your Spot</strong>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Filter by vehicle type and pick a slot</p>
+          </div>
+        </div>
+        <div style="display: flex; align-items: start; gap: 12px;">
+          <span style="font-size: 24px;">3️⃣</span>
+          <div>
+            <strong>Park Safely</strong>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Your spot is reserved until you cancel</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="text-align: center; padding: 24px; color: rgba(255,255,255,0.6); font-size: 0.875rem;">
+    <p>ParkBy – Smart Parking Solutions</p>
+    <p style="margin-top: 8px; font-size: 0.75rem;">© 2026 All rights reserved</p>
+  </footer>
 
   <script src="user.js"></script>
 </body>
