@@ -1,4 +1,4 @@
-const API = "http://localhost:5000";
+const API = "https://parkby-production.up.railway.app";
 
 // Toast notification system
 function showToast(message, type = 'info') {
