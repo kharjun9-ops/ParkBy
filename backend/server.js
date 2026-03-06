@@ -300,16 +300,3 @@ app.delete("/api/cancel-booking/:id", authMiddleware, (req, res) => {
   });
 });
 
-async function cancelBooking(bookingId) {
-  const res = await fetch(`${API}/api/cancel-booking/${bookingId}`, {
-    method: "DELETE",
-    headers: {
-      "Authorization": `Bearer ${token}`
-    }
-  });
-
-  const data = await res.json();
-  alert(data.message);
-  loadMyBookings();
-  loadSlots();
-}
